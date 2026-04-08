@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Влад & Диана — Свадьба</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dark: #9b7a2e;
+  --black: #080604;
+  --dark: #0d0b08;
+  --dark2: #141208;
+  --cream: #f5efe0;
+  --text-muted: rgba(201,168,76,0.45);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Josefin Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:#080604;}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);}
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 20px 60px;
+  background: linear-gradient(180deg, rgba(8,6,4,0.95) 0%, transparent 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 0.5px solid rgba(201,168,76,0.1);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  color: var(--gold);
+  letter-spacing: 3px;
+}
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(245,239,224,0.5); text-decoration:none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+  text-align:center;
+  padding: 80px 20px;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 60%);
+}
+
+/* geometric ornament */
+.hero-geo {
+  position:absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width:600px; height:600px;
+  pointer-events:none;
+}
+.geo-ring {
+  position:absolute; top:50%; left:50%;
+  border: 0.5px solid rgba(201,168,76,0.06);
+  border-radius:50%;
+  animation: rotateRing 30s linear infinite;
+}
+.geo-ring:nth-child(1){width:500px;height:500px;transform:translate(-50%,-50%) rotate(0deg);}
+.geo-ring:nth-child(2){width:380px;height:380px;transform:translate(-50%,-50%) rotate(0deg);border-color:rgba(201,168,76,0.04);animation-duration:20s;animation-direction:reverse;}
+.geo-ring:nth-child(3){width:260px;height:260px;transform:translate(-50%,-50%);border-color:rgba(201,168,76,0.08);animation-duration:40s;}
+
+/* diamond shapes */
+.diamond-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(45deg, rgba(201,168,76,0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(201,168,76,0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(201,168,76,0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(201,168,76,0.03) 75%);
+  background-size: 80px 80px;
+  background-position: 0 0, 0 40px, 40px -40px, -40px 0px;
+}
+
+@keyframes rotateRing { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.hero-eyebrow {
+  font-size:9px; letter-spacing:8px; text-transform:uppercase;
+  color: var(--text-muted); margin-bottom:32px;
+  animation: fadeUp 1.2s ease both;
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 300; font-style: italic;
+  color: var(--gold-light);
+  letter-spacing: 4px;
+  line-height: 0.9;
+  animation: fadeUp 1.2s ease 0.2s both;
+  position: relative; z-index:1;
+}
+.hero-amp {
+  font-size: 0.55em;
+  color: var(--gold-dark);
+  display: inline-block;
+  transform: translateY(-10px);
+}
+.hero-divider {
+  width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 28px auto;
+  animation: fadeIn 1.5s ease 0.5s both;
+  position:relative;
+}
+.hero-divider::before, .hero-divider::after {
+  content:'◆'; position:absolute; top:50%; transform:translateY(-50%);
+  color:var(--gold); font-size:6px;
+}
+.hero-divider::before{left:-12px;}
+.hero-divider::after{right:-12px;}
+
+.hero-date {
+  font-family:'Cinzel', serif;
+  font-size:11px; letter-spacing:6px;
+  color:rgba(245,239,224,0.4);
+  animation: fadeUp 1.2s ease 0.6s both;
+}
+.hero-tagline {
+  font-size:12px; letter-spacing:3px;
+  color: rgba(201,168,76,0.5);
+  margin-top:40px;
+  animation: fadeUp 1.2s ease 0.8s both;
+}
+.hero-btn {
+  display:inline-block; margin-top:40px;
+  padding: 14px 44px;
+  border: 0.5px solid var(--gold);
+  font-family:'Cinzel', serif;
+  font-size:9px; letter-spacing:5px; text-transform:uppercase;
+  color: var(--gold); text-decoration:none;
+  transition: all 0.4s ease;
+  position:relative; overflow:hidden;
+  animation: fadeUp 1.2s ease 1s both;
+}
+.hero-btn::before {
+  content:''; position:absolute; inset:0;
+  background: var(--gold); transform:translateX(-101%);
+  transition: transform 0.4s ease;
+}
+.hero-btn:hover::before { transform:translateX(0); }
+.hero-btn span { position:relative; z-index:1; }
+.hero-btn:hover span { color: var(--black); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
+}
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  animation: fadeIn 2s ease 1.5s both;
+}
+.scroll-hint span { font-size:8px; letter-spacing:4px; color:var(--text-muted); text-transform:uppercase; }
+.scroll-line {
+  width:1px; height:40px;
+  background:linear-gradient(180deg, var(--gold-dark), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100%{transform:scaleY(1);opacity:0.5;}
+  50%{transform:scaleY(1.2);opacity:1;}
+}
+
+/* SECTIONS */
+section { padding: 100px 60px; position:relative; }
+.section-eyebrow {
+  font-size:8px; letter-spacing:7px; text-transform:uppercase;
+  color:var(--text-muted); margin-bottom:16px; text-align:center;
+}
+.section-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(32px,5vw,52px); font-weight:300; font-style:italic;
+  color:var(--gold-light); text-align:center; margin-bottom:16px;
+}
+.gold-line {
+  width:80px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 60px;
+}
+
+/* STORY */
+.story { background:var(--dark); }
+.story-inner {
+  max-width:800px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+}
+.story-text p {
+  font-size:14px; line-height:2; color:rgba(245,239,224,0.65);
+  font-family:'Josefin Sans',sans-serif; font-weight:300; letter-spacing:0.5px;
+}
+.story-visual {
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+}
+.story-monogram {
+  font-family:'Cormorant Garamond',serif;
+  font-size:100px; font-weight:300; font-style:italic;
+  color:var(--gold-dark); line-height:1;
+  position:relative;
+}
+.story-monogram::before {
+  content:''; position:absolute;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  width:140px; height:140px;
+  border:0.5px solid rgba(201,168,76,0.15);
+  border-radius:50%;
+}
+.story-caption { font-size:9px; letter-spacing:5px; color:var(--text-muted); text-transform:uppercase; }
+
+/* EVENTS */
+.events { background:var(--black); }
+.events-grid {
+  max-width:1000px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+}
+.event-day-title {
+  grid-column:1/-1;
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:5px;
+  color:var(--gold-dark); text-transform:uppercase;
+  padding:20px 0 10px; border-bottom:0.5px solid rgba(201,168,76,0.1);
+  margin-bottom:4px;
+}
+.event-day-title:not(:first-child) { margin-top:40px; }
+.event-card {
+  background:var(--dark2);
+  border:0.5px solid rgba(201,168,76,0.1);
+  padding:32px;
+  transition:border-color 0.3s, background 0.3s;
+  position:relative; overflow:hidden;
+}
+.event-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.event-card:hover { border-color:rgba(201,168,76,0.3); }
+.event-card:hover::before { opacity:1; }
+.event-time {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:4px;
+  color:var(--gold-dark); margin-bottom:12px;
+}
+.event-name {
+  font-family:'Cormorant Garamond',serif; font-size:24px; font-style:italic;
+  color:var(--gold-light); margin-bottom:12px; font-weight:300;
+}
+.event-desc { font-size:12px; line-height:1.9; color:rgba(245,239,224,0.45); letter-spacing:0.5px; }
+.event-tag {
+  display:inline-block; margin-top:16px;
+  padding:4px 14px; border:0.5px solid rgba(201,168,76,0.3);
+  font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);
+}
+
+/* INSTAGRAM */
+.instagram { background:var(--dark); text-align:center; }
+.hashtag {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,48px);
+  font-style:italic; color:var(--gold);
+  border:0.5px solid rgba(201,168,76,0.2);
+  display:inline-block; padding:20px 48px;
+  margin:20px 0;
+  transition:all 0.3s;
+}
+.hashtag:hover { background:rgba(201,168,76,0.05); border-color:var(--gold); }
+.instagram p { font-size:12px; color:rgba(245,239,224,0.4); letter-spacing:1px; line-height:1.9; max-width:500px; margin:0 auto; }
+
+/* MAP / VENUE */
+.venue { background:var(--black); }
+.venue-inner { max-width:900px; margin:0 auto; }
+.venue-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:20px; }
+.venue-card {
+  background:var(--dark2); border:0.5px solid rgba(201,168,76,0.1);
+  padding:40px; transition:all 0.3s;
+}
+.venue-card:hover { border-color:rgba(201,168,76,0.3); }
+.venue-icon {
+  font-size:20px; color:var(--gold-dark); margin-bottom:16px;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+}
+.venue-card h3 {
+  font-family:'Cormorant Garamond',serif; font-size:22px; font-style:italic;
+  color:var(--gold-light); margin-bottom:8px;
+}
+.venue-card p { font-size:12px; color:rgba(245,239,224,0.45); line-height:1.9; }
+.venue-card a {
+  display:inline-block; margin-top:16px;
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold-dark); text-decoration:none;
+  border-bottom:0.5px solid var(--gold-dark);
+  padding-bottom:2px; transition:color 0.3s;
+}
+.venue-card a:hover { color:var(--gold); }
+
+/* RSVP */
+.rsvp { background:var(--dark); text-align:center; }
+.rsvp p { font-size:13px; color:rgba(245,239,224,0.45); letter-spacing:1px; line-height:2; margin-bottom:40px; }
+.rsvp-btn {
+  display:inline-block;
+  padding:18px 60px;
+  background:linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  background-size:200% 100%;
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--black); text-decoration:none;
+  transition:background-position 0.5s, transform 0.3s;
+  cursor:pointer; border:none;
+}
+.rsvp-btn:hover { background-position:100% 0; transform:translateY(-2px); }
+.rsvp-deadline { font-size:10px; color:var(--text-muted); margin-top:20px; letter-spacing:2px; }
+
+/* FOOTER */
+footer {
+  background:var(--black); border-top:0.5px solid rgba(201,168,76,0.1);
+  padding:40px 60px; text-align:center;
+}
+.footer-names { font-family:'Cormorant Garamond',serif; font-size:28px; font-style:italic; color:var(--gold-dark); }
+.footer-copy { font-size:10px; color:rgba(245,239,224,0.2); letter-spacing:2px; margin-top:16px; }
+.footer-copy a { color:var(--gold-dark); text-decoration:none; }
+
+/* ANIMATIONS on scroll */
+.reveal {
+  opacity:0; transform:translateY(30px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  section{padding:70px 24px;}
+  .story-inner,.events-grid,.venue-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">В & Д</div>
+  <ul class="nav-links">
+    <li><a href="#story">История</a></li>
+    <li><a href="#events">События</a></li>
+    <li><a href="#instagram">Instagram</a></li>
+    <li><a href="#venue">Место</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="diamond-grid"></div>
+  <div class="hero-geo">
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+  </div>
+
+  <div class="hero-eyebrow">Приглашение на свадьбу</div>
+  <div class="hero-names">
+    Влад<span class="hero-amp">&</span>Диана
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-date">Сентябрь · 2027 · Ташкент</div>
+  <div class="hero-tagline">Мы создаём семью</div>
+  <a href="#rsvp" class="hero-btn"><span>Подтвердить присутствие</span></a>
+
+  <div class="scroll-hint">
+    <span>Листать</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="section-eyebrow">Наша история</div>
+  <div class="section-title">Как мы познакомились</div>
+  <div class="gold-line"></div>
+  <div class="story-inner reveal">
+    <div class="story-text">
+      <p>Влад и Диана встретились совершенно случайно — так, как это бывает только в кино. Одна улыбка, один взгляд — и жизнь уже не была прежней.</p>
+      <br>
+      <p>Они поняли, что рядом находится тот самый человек, которого искали. Со временем дружба переросла в нечто большее, и теперь они готовы шагнуть навстречу совместному будущему.</p>
+    </div>
+    <div class="story-visual">
+      <div class="story-monogram">В&Д</div>
+      <div class="story-caption">С любовью · навсегда</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="section-eyebrow">Программа торжества</div>
+  <div class="section-title">События</div>
+  <div class="gold-line"></div>
+  <div class="events-grid">
+    <div class="event-day-title">День первый — Сентябрь 2027</div>
+
+    <div class="event-card reveal">
+      <div class="event-time">13:00 — 17:00</div>
+      <div class="event-name">Никах</div>
+      <p class="event-desc">Традиционный мусульманский обряд бракосочетания. Торжественная атмосфера, молитвы, благословения родителей и радость близких.</p>
+      <div class="event-tag">Традиционный наряд</div>
+    </div>
+
+    <div class="event-card reveal" style="transition-delay:0.15s">
+      <div class="event-time">19:00 — 00:00</div>
+      <div class="event-name">Вечер встречи</div>
+      <p class="event-desc">Неформальный вечер для самых близких — живая музыка, тёплая атмосфера и уютные беседы. Время создать первые воспоминания.</p>
+      <div class="event-tag">Smart Casual</div>
+    </div>
+
+    <div class="event-day-title">День второй — Сентябрь 2027</div>
+
+    <div class="event-card reveal">
+      <div class="event-time">10:00 — 12:00</div>
+      <div class="event-name">Утренний приём</div>
+      <p class="event-desc">Традиционное утреннее чаепитие с семьёй и близкими друзьями. Тёплые поздравления и семейные фотографии.</p>
+      <div class="event-tag">Свободный стиль</div>
+    </div>
+
+    <div class="event-card reveal" style="transition-delay:0.15s">
+      <div class="event-time">18:00 — 00:00</div>
+      <div class="event-name">Свадьба</div>
+      <p class="event-desc">Главное торжество! Банкетный зал, живая музыка, танцы и изысканный ужин. Этот вечер будет наполнен любовью и воспоминаниями на всю жизнь.</p>
+      <div class="event-tag">Торжественный</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="instagram" id="instagram">
+  <div class="section-eyebrow">Социальные сети</div>
+  <div class="section-title">Поделитесь моментами</div>
+  <div class="gold-line"></div>
+  <div class="reveal">
+    <div class="hashtag">#ВладИДиана</div>
+    <p>Помогите нам сохранить каждый момент этого особенного дня.<br>Отмечайте свои фото нашим хэштегом в Instagram.</p>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section class="venue" id="venue">
+  <div class="section-eyebrow">Место торжества</div>
+  <div class="section-title">Как добраться</div>
+  <div class="gold-line"></div>
+  <div class="venue-inner">
+    <div class="venue-grid reveal">
+      <div class="venue-card">
+        <div class="venue-icon">◈ Адрес</div>
+        <h3>Ташкент, Узбекистан</h3>
+        <p>Точный адрес будет отправлен всем гостям дополнительно. Мы позаботимся о том, чтобы вы нашли нас без труда.</p>
+        <a href="#">Открыть на карте →</a>
+      </div>
+      <div class="venue-card">
+        <div class="venue-icon">◈ Контакт</div>
+        <h3>Маннапов Улугбек</h3>
+        <p>+998 91 777 36 09<br>@VVebstyle в Telegram</p>
+        <a href="https://t.me/VVebstyle">Написать в Telegram →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp" id="rsvp">
+  <div class="section-eyebrow">Ваш ответ</div>
+  <div class="section-title">Будете с нами?</div>
+  <div class="gold-line"></div>
+  <div class="reveal">
+    <p>Пожалуйста, подтвердите своё присутствие<br>до 1 августа 2027 года</p>
+    <button class="rsvp-btn" onclick="alert('Спасибо! Мы рады, что вы будете с нами.')">Да, я буду!</button>
+    <div class="rsvp-deadline">Ждём вашего ответа до 1 августа 2027</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-names">Влад & Диана</div>
+  <div class="footer-copy">
+    Создано с любовью · <a href="https://t.me/WebFlow_TC">TC Digital</a>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
